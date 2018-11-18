@@ -1,3 +1,4 @@
+"""This is import"""
 import csv
 import numpy as np
 from sklearn.svm import SVR
@@ -7,6 +8,7 @@ dates = []
 prices = []
 
 def get_data(filename):
+    """This function gets the file"""
     with open(filename, 'r') as csvfile:
         csvFileReader = csv.reader(csvfile)
         next (csvFileReader)
@@ -16,15 +18,16 @@ def get_data(filename):
     return
 
 def predict_prices(dates, prices, x):
-    dates = np.reshape(dates,(len(dates), 1))
+    """This function will predict share price"""
+    dates = np.reshape(dates, (len(dates), 1))
 
     svr_lin = SVR(kernel= 'linear', C=1e3)
-    svr_poly = SVR(kernel= 'poly', C=1e3, degree = 2)
-    svr_rbf = SVR(kernel= 'rbf', C=1e3, gamma=0.1)
+    svr_poly = SVR(kernel= 'poly', C=1e3, degree=2)
+    svr_rbf = SVR(kernel = 'rbf', C=1e3, gamma=0.1)
     svr_lin.fit(dates, prices)
     svr_poly.fit(dates, prices)
     svr_rbf.fit(dates, prices)
-    
+
     plt.scatter(dates, prices, color='black', label='Data')
     plt.plot(dates, svr_rbf.predict(dates), color='red', label='RBF Model')
     plt.plot(dates, svr_lin.predict(dates), color='green', label='Linear Model')
@@ -39,8 +42,6 @@ def predict_prices(dates, prices, x):
 
 get_data('aapl.csv')
 
-predicted_prices = predict_prices(dates, prices, 29)
+predicted_prices = predict_prices(dates, prices, 18)
 
-#print(predicted_prices)
-
-
+print predicted_prices

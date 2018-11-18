@@ -1,6 +1,5 @@
 '''
-	This program is created to show how python can call
-	REST url and processes all the data without any issues
+	Program to show how python calls a REST url	
 '''
 
 import requests
@@ -20,15 +19,15 @@ def getURLResponse(str_URL, isAll):
 	    raise ApiError('GET /tasks/ {}'.format(resp.status_code))
 
 	responseJSON = json.loads(response.text)
-	print "Json response: " + response.text
-	# printResponse(responseJSON, isAll)
+	#print "Json response: " + response.text
+	printResponse(responseJSON, isAll)
 
 def printResponse(strJSONReponse, isAll):
 	if isAll:
 		for result in strJSONReponse['RestResponse']['result']:
 			print "name: " + result['name'] + ", code1: " + result['alpha2_code'] + ", code2: " + result['alpha3_code']
 	else:
-		print "name: %s, code1: %s, code3: %s" % (strJSONReponse['RestResponse']['result'].get("name"),
+		print "name: %s, code1: %s, code2: %s" % (strJSONReponse['RestResponse']['result'].get("name"),
 												strJSONReponse['RestResponse']['result'].get("alpha2_code"), 
 												strJSONReponse['RestResponse']['result'].get("alpha3_code"))
 

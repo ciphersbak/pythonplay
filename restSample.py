@@ -7,7 +7,6 @@ if response.status_code != 200:
     raise ApiError('GET /tasks/ {}'.format(resp.status_code))
 
 responseJSON = json.loads(response.text)
-#print "Json response: " + response.text
 
 for result in responseJSON['RestResponse']['result']:
-	print "name: " + result['name'].encode('utf-8').strip() + ", code1: " + result['alpha2_code'].encode('utf-8').strip() + ", code2: " + result['alpha3_code'].encode('utf-8').strip()
+	print "name: " + result['name'] + ", code1: " + result['alpha2_code'] + ", code2: " + result['alpha3_code']
